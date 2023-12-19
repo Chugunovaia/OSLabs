@@ -29,7 +29,7 @@ void* producer(void*arg)
 
 void* consumer(void*arg) 
 {
-    for (int i = 0; i < 5; i++)
+    for ( int i = 0; i < 5; i++)
     {
         pthread_mutex_lock(&lock);
         while (ready == 0)
