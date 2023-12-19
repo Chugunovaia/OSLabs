@@ -5,7 +5,7 @@
 pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 int ready = 0;
-boolean flag = true;
+
 using namespace std;
 
 void* producer(void*arg)
@@ -23,18 +23,17 @@ void* producer(void*arg)
         pthread_cond_signal(&cond1); //условная переменная
         pthread_mutex_unlock(&lock);
     }
-    flag = false;
+  
         return nullptr;
 }
 
 void* consumer(void*arg) 
 {
-    while (flag)
+    for (int i = 0; i < 5; i++)
     {
         pthread_mutex_lock(&lock);
         while (ready == 0)
         {
-            if (!flag) break;
             pthread_cond_wait(&cond1, &lock); 
 
         }
