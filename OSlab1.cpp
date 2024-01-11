@@ -16,6 +16,7 @@ void* producer(void*arg)
         if (ready == 1)
         {
             pthread_mutex_unlock(&lock);
+            continue;
         }
         Sleep(1000);
         ready = 1;
